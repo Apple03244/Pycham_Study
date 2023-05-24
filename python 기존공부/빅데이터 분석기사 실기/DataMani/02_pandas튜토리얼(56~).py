@@ -30,4 +30,5 @@ d['newLimit'].value_counts()
 #62.Marital_Status 컬럼값이 Married 이고 Card_Category 컬럼의 값이 Platinum인 경우 1 그외의 경우에는 모두 0으로 하는 newState컬럼을 정의하라. newState의 각 값들의 빈도수를 출력하라
 id1=d['Marital_Status']=='Married'
 id2=d['Card_Category']=='Platinum'
-d['newState']=d.apply(lambda x:)
+d['newstate']=d[['Marital_Status','Card_Category']].apply(lambda x:1 if x=='Married' & x=='Platinum' else 0)
+
