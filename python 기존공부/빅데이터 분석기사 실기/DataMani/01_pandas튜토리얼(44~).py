@@ -53,4 +53,6 @@ d.groupby(['neighbourhood','neighbourhood_group'])['price'].mean().unstack().fil
 d.loc[d['neighbourhood_group']=='Queens'].groupby('neighbourhood')['price'].agg(['min','max','var','mean'])
 
 #55.데이터중 neighbourhood_group 값에 따른 room_type 컬럼의 숫자를 구하고 neighbourhood_group 값을 기준으로 각 값의 비율을 구하여라
-d.groupby(['neighbourhood_group','room_type']).size().unstack()
+ans=pd.DataFrame(d.groupby(['neighbourhood_group','room_type']).size().unstack())
+temp=d.groupby(['neighbourhood_group'])['room_type'].size()
+ans.apply(lambda x:x/temp)
