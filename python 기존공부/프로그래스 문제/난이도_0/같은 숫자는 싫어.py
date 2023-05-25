@@ -1,5 +1,6 @@
 def solution(array):
     temp=None
+
     answer=[]
     for x in array:
         if x!=temp:
