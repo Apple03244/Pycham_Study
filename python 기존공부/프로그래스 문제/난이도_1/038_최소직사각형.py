@@ -6,7 +6,7 @@ def solution(sizes):
             x=divmod(x,2)[0]
         result.append(x)
         return result
-    col=list(map(base_2,[i for i in range(pow(2,len(sizes))//2)]))
+    col=list(map(base_2,[i for i in range(pow(2,len(sizes)))]))
     for x in col:
         if len(x)<4:
             x.extend([0 for i in range(4-len(x))])
