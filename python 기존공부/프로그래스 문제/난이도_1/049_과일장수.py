@@ -1,7 +1,11 @@
 def solution(k, m, score):
-    set_num=len(score)//m
-    score.sort(reverse=True)
-    fruits=[]
-    for
+    score.sort()
+    box=[]
+    while len(score)>=m:
+        fruits=[]
+        for i in range(m):
+            fruits.append(score.pop())
+        box.append(fruits)
+    return sum(list(map(lambda x:min(x)*len(x),box)))
 
-    return answer
+solution(4,3,[4, 1, 2, 2, 4, 4, 4, 4, 1, 2, 4, 2])
