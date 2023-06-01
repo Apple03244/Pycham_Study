@@ -38,12 +38,28 @@ for dir in dirlist:
 path=r'D:\Pycham_Study'
 dirlist=os.listdir(path)
 pylist=[]
-
+#디렉토리 위치 추출하는 것
 def search(path):
     result=[]
-    for dir in dirlist:
+    for dir in os.listdir(path):
        if os.path.splitext(dir)[1]==".py":
-            pylist.appned(os.path.join(path,dir))
+            pylist.append(os.path.join(path,dir)) #python 파일의 위치를 저장
        elif os.path.isdir(os.path.join(path,dir)):
            result.append(os.path.join(path,dir))
-    return result
+    return result #디렉토리 주소들의 집합
+
+#초기값
+path=r'D:\Pycham_Study'
+path_list=[path]
+pylist=[]
+
+while True:
+    new_path=[]
+    for x in path_list:
+        new_path.extend(search(x))
+    if not new_path:
+        break
+    else:
+        path_list=new_path
+
+print(pylist)

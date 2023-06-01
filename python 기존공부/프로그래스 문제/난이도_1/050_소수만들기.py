@@ -5,7 +5,7 @@ def solution(nums):
         for j in range(i+1,len(nums)-1):
             for z in range(j+1,len(nums)):
                 cand.append([nums[i],nums[j],nums[z]])
-    return cand
+    return sum(list(map(prime,list(map(sum,cand)))))
 solution([1,2,3,4])
 
 prime(7)
