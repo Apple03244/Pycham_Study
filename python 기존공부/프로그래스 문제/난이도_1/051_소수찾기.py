@@ -50,7 +50,7 @@ def solution(n):
         else:
             m=numlist[0]
     return len(result)
-)solution(5)
+solution(5)
 
 
 a=[1,2,3,4]
