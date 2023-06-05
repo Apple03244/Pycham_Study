@@ -32,3 +32,7 @@ id1=d['Marital_Status']=='Married'
 id2=d['Card_Category']=='Platinum'
 d['newstate']=d[['Marital_Status','Card_Category']].apply(lambda x:1 if x=='Married' & x=='Platinum' else 0)
 
+#63.Gender 컬럼값 M인 경우 male F인 경우 female로 값을 변경하여 Gender 컬럼에 새롭게 정의하라. 각 value의 빈도를 출력하라
+d['Gender']=d['Gender'].apply(lambda x:"male" if x=="M" else 'female')
+answer=d['Gender'].value_counts()
+answer

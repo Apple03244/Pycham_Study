@@ -55,3 +55,40 @@ solution(5)
 
 a=[1,2,3,4]
 a.de(10)
+
+#진짜 마지막
+import math
+dir(math)
+def solution(n):
+    prime_set=[2]
+    ls=[x for x in list(range(2,n+1))]
+    while True:
+        ls=[x for x in ls if x%prime_set[-1]]
+        for x in ls:
+            if all(map(lambda i:x%i,[i for i in prime_set if i<=x**(1/2)])):
+                prime_set.append(x)
+                break
+        #언제까지 할거냥
+        #시벌...
+
+
+    prime_set=[] #소수 리스트
+    def prime(x): #소수 확인
+        if all(map(lambda y:x*y,[i for i in prime_set if i<=pow(x,1/2)])):
+            prime_set.append(x)
+
+def solution(n):
+    prime_set=[] #소수 리스트
+    Z=list(range(2,n+1))
+    while Z:
+        for x in Z:
+            if all(map(lambda y:x*y,[i for i in prime_set if i<=pow(x,1/2)])):
+                prime_set.append(x)
+                Z=list(filter(lambda num:num%x,Z))
+                #print(Z)
+                break
+    return prime_set
+
+def solution(n):
+
+
