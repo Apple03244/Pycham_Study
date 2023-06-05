@@ -39,4 +39,13 @@ data.groupby(data.Yr_Mo_Dy.dt.month).mean()
 
 #72.모든 결측치는 컬럼기준 직전의 값으로 대체하고 첫번째 행에 결측치가 있을경우 뒤에있는 값으로 대채하라
 inx=data.isna()==True
-data.isna().sum()
+data.fillna(method='ffill').fillna(method='bfill')
+
+#73.년도 - 월을 기준으로 모든 컬럼의 평균값을 구하여라
+data.groupby([data.Yr_Mo_Dy.dt.year,data.Yr_Mo_Dy.dt.month]).mean().unstack()
+
+data.groupby(data.Yr_Mo_Dy.dt.to_period('M')).mean()
+data.groupby()
+
+#RPT 컬럼의 값을 일자별 기준으로 1차차분하라
+data['RPT'].diff()
