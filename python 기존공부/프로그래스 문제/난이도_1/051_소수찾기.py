@@ -12,8 +12,20 @@
 
 #효율성이 안나옴
 def solution(x):
-    result=list(range(1,x+1))
-    def cut(x,y):
-        if x==1:
-            pass
+    if x==1:
+        result=[]
+    elif x==2:
+        return [2]
+    else:
+        test = list(range(1,x+1))
+        i=2
+        while True:
+           for y in test:
+               if y%i==0 and y//i!=0:
+                   test.remove(y)
+                    pass
+            return test
+
+solution(10)
+
 
