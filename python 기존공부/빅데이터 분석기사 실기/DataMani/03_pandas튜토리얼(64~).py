@@ -47,5 +47,45 @@ data.groupby([data.Yr_Mo_Dy.dt.year,data.Yr_Mo_Dy.dt.month]).mean().unstack()
 data.groupby(data.Yr_Mo_Dy.dt.to_period('M')).mean()
 data.groupby()
 
-#RPT 컬럼의 값을 일자별 기준으로 1차차분하라
+#74. RPT 컬럼의 값을 일자별 기준으로 1차차분하라
 data['RPT'].diff()
+
+#75.RPT와 VAL의 컬럼을 일주일 간격으로 각각 이동평균한값을 구하여라
+data[['RPT','VAL']].rolling(7).mean()
+
+#76. data road, 서울시의 제공데이터의 경우 0시가 24시로 표현된다
+D=pd.read_csv(r'https://raw.githubusercontent.com/Datamanim/pandas/main/seoul_pm.csv')#,encoding="euc-kr")
+data=pd.DataFrame(D)
+data.head(2)
+
+def defDay(x):
+    days=x.split(":")[0]
+    times=x.split(":")[1]
+    #24시 처리
+    if times=="24":
+        times="00:00:00"
+    else:
+        times+=":00:00"
+    return pd.to_datetime(days+" "+times)
+
+data["(년-월-일:시)"]=data["(년-월-일:시)"].apply(defDay)
+data["(년-월-일:시)"]
+
+#77.일자별 영어요일 이름을 dayName 컬럼에 저장하라
+data["(년-월-일:시)"].dt.weekday
+dic=dict(zip(range(7),['Mon','Tus','Wen','Thu','Fri','Sat','Sun']))
+data['dayName']=data["(년-월-일:시)"].dt.weekday.apply(lambda x:dic[x])
+data['dayName']
+
+#78.일자별 각 PM10등급의 빈도수를 파악하라
+ans=data.groupby(['dayName','PM10등급'],as_index=False).size()
+ans
+a=data["(년-월-일:시)"].iloc[15]
+data["(년-월-일:시)"].iloc[16]
+
+#79.시간이 연속적으로 존재하며 결측치가 없는지 확인하라
+data["(년-월-일:시)"].diff().unique()
+
+#80.오전 10시와 오후 10시(22시)의 PM10의 평균값을 각각 구하여라
+inx1=data["(년-월-일:시)"].astype("str")=="10:00:00"
+inx2=data["(년-월-일:시)"].astype("str")=="10:00:00"
