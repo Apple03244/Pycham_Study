@@ -21,7 +21,7 @@ data['Yr_Mo_Dy'].dt.year.unique() #오...
 idx=data['Yr_Mo_Dy'].dt.year>=2061
 data.loc[idx,'Yr_Mo_Dy']=data[idx]['Yr_Mo_Dy'].apply(lambda x:pd.to_datetime(datetime.date(x.year-100,x.month,x.day)))
 data['Yr_Mo_Dy']
-
+data2=data.copy()
 #68.년도별 각컬럼의 평균값을 구하여라
 data.groupby(data['Yr_Mo_Dy'].dt.year).mean()
 
@@ -87,5 +87,16 @@ data["(년-월-일:시)"].iloc[16]
 data["(년-월-일:시)"].diff().unique()
 
 #80.오전 10시와 오후 10시(22시)의 PM10의 평균값을 각각 구하여라
-inx1=data["(년-월-일:시)"].astype("str")=="10:00:00"
-inx2=data["(년-월-일:시)"].astype("str")=="10:00:00"
+idx1=data["(년-월-일:시)"].apply(lambda x:str(x).split(" ")[-1])=="10:00:00"
+idx2=data["(년-월-일:시)"].apply(lambda x:str(x).split(" ")[-1])=="22:00:00"
+data.loc[idx1,"PM10"].mean()
+data.loc[idx2,'PM10'].mean()
+
+data.groupby(data["(년-월-일:시)"].dt.hour)["PM10"].mean().loc[[10,22]]
+
+#81.날짜 컬럼을 index로 만들어라
+data.set_index("(년-월-일:시)",inplace=True,drop=True)
+
+#82.데이터를 주단위로 뽑아서 최소,최대 평균, 표준표차를 구하여라
+data["PM10"].resample('W').agg(['min','max','std','mean'])
+

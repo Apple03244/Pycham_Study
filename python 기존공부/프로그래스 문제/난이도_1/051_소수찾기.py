@@ -29,6 +29,11 @@ def solution(n):
                 break
     return n-1-len(result)
 
+
+
+
+
+
 solution(10)
 import math
 dir(math)
@@ -90,5 +95,17 @@ def solution(n):
     return prime_set
 
 def solution(n):
+    prime=[]
+    test=list(range(2,n+1))
 
 
+
+dic={}
+for a in ['lee','kim','park']:
+    dic[a]=a
+
+#zip
+dic=dict(zip(['lee','kim','park'],[1,2,3]))
+dict(enumerate(['lee','kim','park']))
+a=10
+a
