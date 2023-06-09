@@ -43,3 +43,40 @@ a.trans
 20
 for i in range(1,20+1):
     print(i)
+
+#효율성
+from collections import Counter
+a=[1,1,1,1,1,2,2,2,2,2,3,3,4]
+result={}
+for i in a:
+    if i not in result:
+        result[i]=1
+    else:
+        result[i]+=1
+result
+Counter(a)
+
+
+
+a=1234
+result=0
+if a>=1:
+    result+=1
+if a>=10:
+    result+=1
+if a>=100:
+    result+=1
+else:
+    result+=1
+
+print(result)
+
+import numpy as np
+A=np.array([[1,2,3],[4,5,6],[7,8,9]])
+a=[[1,2,3],[4,5,6]]
+a[0][1]
+A[0,1]
+type(A)
+id=A>=4
+A[A>=4]
+temp=#1번째에서 뽑은 작은 숫자

@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 D=pd.read_csv(r'https://raw.githubusercontent.com/Datamanim/datarepo/main/youtube/youtube.csv'
               ,index_col="Unnamed: 0")
 data=pd.DataFrame(D)
@@ -54,10 +55,27 @@ test=pre_data.loc[pre_data.ratio!=0]
 test.sort_values(by='ratio').title.iloc[0]
 
 #8.like 대비 dislike의 수가 가장 적은 영상은 무엇인가? (like, dislike 값이 0인경우는 제외한다
-pre_data=data.copy()
-idx=pre_data.dislikes!=0
-idx2=pre_data.likes!=0
-test=pre_data.loc[(idx)&(idx2)].dropna()
-test["ratio"]=test['dislikes']/pre_data['likes']
-test[test.ratio.sort_values().index[0]]
+test=data.loc[(data['dislikes']!=0)&(data['likes']!=0)]
+test=test.loc[(test.likes.dropna().index)&(test.dislikes.dropna().index)]
+test['ratio']=test.likes/test.dislikes
+test.loc[test.ratio==test.ratio.min()].title
 
+answer=(test['likes']/test['dislikes']).sort_values().index[0]
+test.loc[answer].title
+
+#다시 풀어보자
+test=data.loc[(data['dislikes']!=0)&(data['likes']!=0)]
+
+
+#9.가장많은 트렌드 영상을 제작한 채널의 이름은 무엇인가? (날짜기준, 중복포함)
+data['temp']=data.groupby(["channelTitle"])['title'].transform(np.size)
+data.sort_values(by='temp',ascending=False)["channelTitle"].iloc[0]
+
+#10.20회(20일)이상 인기동영상 리스트에 포함된 동영상의 숫자는?
+data.drop("temp",axis=1,inplace=True)
+data.trending_date2.
+
+(data[['title','trending_date2']].value_counts()>=20).sum()
+
+data['temp']=data.groupby(['title'])["channelId"].transform(np.count_nonzero)
+len(set(data.loc[data.temp>=20].title))
