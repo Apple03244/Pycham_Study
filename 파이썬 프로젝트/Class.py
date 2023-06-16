@@ -89,6 +89,8 @@ P1=Person('이정훈',28,"남자","apple03244@gmail.com")
 P1.register()
 P1.myInfo
 
+dic={1:100,2:200}
+dic.1
 P2=Person("김모모",25,"여자",'apple03244@kakao.com')
 P2.register()
 P2.myInfo
